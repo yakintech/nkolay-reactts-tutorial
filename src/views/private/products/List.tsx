@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { axiosInstance } from '../../../network/axiosInstance'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 function List() {
 
@@ -36,6 +37,8 @@ function List() {
 
   }
 
+  const navigate = useNavigate();
+
   const columns: GridColDef[] = [
     {
       field: 'id',
@@ -64,6 +67,16 @@ function List() {
       renderCell: (params: any) => {
         return (
           <Button onClick={() => deleteProduct(params.id)} variant='outlined' color='error'>Delete</Button>
+        )
+      }
+    },
+    {
+      field: "Edit",
+      headerName: "Edit",
+      width: 200,
+      renderCell: (params: any) => {
+        return (
+          <Button onClick={() => navigate('/products/edit/' + params.id)} variant='outlined' color='primary'>Edit</Button>
         )
       }
     }
