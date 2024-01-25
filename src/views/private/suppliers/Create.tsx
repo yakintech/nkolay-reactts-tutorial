@@ -12,7 +12,12 @@ type SupplierFormInputs = {
 
 function Create() {
 
-  const { register, handleSubmit } = useForm<SupplierFormInputs>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, submitCount }
+
+  } = useForm<SupplierFormInputs>()
 
   const addSupplier = (data: SupplierFormInputs) => {
 
@@ -27,14 +32,17 @@ function Create() {
   }
 
   return (<>
+  <h1>{submitCount}</h1>
     <form onSubmit={handleSubmit(addSupplier)}>
       <div>
         <label>Company Name</label>
-        <input {...register('companyName')} />
+        <input {...register('companyName', { required: true })} />
+        {errors.companyName && <span style={{color:'red'}}>Company Name is required</span>}
       </div>
       <div>
         <label>Contact Name</label>
-        <input {...register('contactName')} />
+        <input {...register('contactName', { required: true })} />
+        {errors.contactName && <span style={{color:'red'}}>Contact Name is required</span>}
       </div>
       <div>
         <label>Contact Title</label>
