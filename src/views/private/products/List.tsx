@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { axiosInstance } from '../../../network/axiosInstance'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { FavoritesContext, FavoritesContextType } from '../../../context/FavoritesContext'
 
 function List() {
 
   const [products, setproducts] = useState([])
   const [loading, setloading] = useState(true)
 
+  //context e bağlandım ve addFavorites fonksiyonunu aldım
+  const {addFavorites} = useContext(FavoritesContext) as FavoritesContextType
+
   useEffect(() => {
     load()
   }, [])
-
 
   const load = () => {
     axiosInstance.get('products')
@@ -77,6 +80,16 @@ function List() {
       renderCell: (params: any) => {
         return (
           <Button onClick={() => navigate('/products/edit/' + params.id)} variant='outlined' color='primary'>Edit</Button>
+        )
+      }
+    },
+    {
+      field: "Add to Favorites",
+      headerName: "Add to Favorites",
+      width: 200,
+      renderCell: (params: any) => {
+        return (
+          <Button onClick={() => addFavorites(params.row)} variant='outlined' color='primary'>Add to Favorites</Button>
         )
       }
     }

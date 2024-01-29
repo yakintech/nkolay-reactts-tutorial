@@ -10,11 +10,13 @@ function Header() {
                 <li><Link to='/'>Dashboard</Link></li>
                 <li><Link to='/products'>Products</Link></li>
                 <li><Link to='/suppliers'>Suppliers</Link> </li>
+                <li><Link to='/favorites'>Favorites</Link> </li>
             </ul>
         </nav>
 
     </>
     )
 }
+
 
 export default Header
