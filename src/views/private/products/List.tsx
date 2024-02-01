@@ -4,6 +4,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { FavoritesContext, FavoritesContextType } from '../../../context/FavoritesContext'
+import { CartContext } from '../../../context/CartContext'
 
 function List() {
 
@@ -11,7 +12,8 @@ function List() {
   const [loading, setloading] = useState(true)
 
   //context e bağlandım ve addFavorites fonksiyonunu aldım
-  const {addFavorites} = useContext(FavoritesContext) as FavoritesContextType
+  const { addFavorites } = useContext(FavoritesContext) as FavoritesContextType
+  const { addToCart } = useContext(CartContext)
 
   useEffect(() => {
     load()
@@ -86,10 +88,20 @@ function List() {
     {
       field: "Add to Favorites",
       headerName: "Add to Favorites",
-      width: 200,
+      width: 180,
       renderCell: (params: any) => {
         return (
           <Button onClick={() => addFavorites(params.row)} variant='outlined' color='primary'>Add to Favorites</Button>
+        )
+      }
+    },
+    {
+      field: "addtocart",
+      headerName: "Add to Cart",
+      width: 150,
+      renderCell: (params: any) => {
+        return (
+          <Button onClick={() => addToCart(params.row)} variant='outlined' color='primary'>Add to Cart</Button>
         )
       }
     }

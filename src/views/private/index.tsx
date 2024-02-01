@@ -5,6 +5,7 @@ import Dashboard from './dashboard'
 import Suppliers from './suppliers'
 import Header from './components/Header'
 import Favorites from './favorites'
+import Cart from './cart'
 
 function PrivateLayout() {
   return (<>
@@ -17,6 +18,7 @@ function PrivateLayout() {
       <Route path="/products/*" element={<Products />} />
       <Route path='/suppliers/*' element={<Suppliers />} />
       <Route path='/favorites' element={<Favorites />} />
+      <Route path='/cart' element={<Cart />} />
     </Routes>
 
     <footer>2024</footer>
