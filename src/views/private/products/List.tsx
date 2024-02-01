@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { axiosInstance } from '../../../network/axiosInstance'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FavoritesContext, FavoritesContextType } from '../../../context/FavoritesContext'
 import { CartContext } from '../../../context/CartContext'
 
@@ -56,7 +56,7 @@ function List() {
       width: 400,
       renderCell: (params: any) => {
         return (
-          <p>{params.value.toUpperCase()}</p>
+          <Link to={'/products/' + params.row.id}>{params.value?.toUpperCase()}</Link>
         )
       }
     },
@@ -110,7 +110,7 @@ function List() {
 
   return (<>
     {
-      loading ? <h1>Loading..</h1> : <div style={{ height: 300, width: '100%' }}>
+      loading ? <h1>Loading..</h1> : <div style={{ height: 600, width: '100%' }}>
         <DataGrid
           rows={products}
           columns={columns}
